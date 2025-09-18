@@ -1,10 +1,10 @@
-import Navbar from '@/module/shared/navbar'
+import Home from '@/module/home/home';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className='min-h-full flex flex-col container mx-auto'>
-      <Navbar />
-      <h1>Home Page</h1>
+    <div className=''>
+
+      <Home />
 
     </div>
   );

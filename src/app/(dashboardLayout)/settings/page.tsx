@@ -1,10 +1,10 @@
 import Header from '@/components/ui/header'
 import React from 'react'
 
-export default function Home() {
+export default function SettingsPage() {
   return (
-    <div >
-      <Header title='Home Page'></Header>
+    <div>
+      <Header title='Settings' />
     </div>
   )
 }

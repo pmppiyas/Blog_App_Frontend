@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
@@ -11,19 +12,25 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import Logo from '../../../public/icon/logo'
-
+import Link from "next/link";
+import { Input } from '@/components/ui/input';
+import { usePathname } from "next/navigation";
 
 const navigationLinks = [
   { href: "/", label: "Home", active: true },
-  { href: "dashboard", label: "Dashboard" },
-  { href: "blog", label: "Blog" },
-  { href: "contact", label: "Contact" },
-  { href: "about", label: "About Us" },
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About Us" },
 ]
 
 export default function Navbar() {
+  const pathName = usePathname();
+
+
+
   return (
-    <header className="border-b px-4 md:px-6">
+    <header className="border-b px-4 md:px-6 ">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -85,32 +92,50 @@ export default function Navbar() {
             <a href="#" className="text-primary hover:text-primary/90">
               <Logo />
             </a>
-            {/* Navigation menu */}
-            <NavigationMenu className="max-md:hidden">
-              <NavigationMenuList className="gap-2">
-                {navigationLinks.map((link, index) => (
-                  <NavigationMenuItem key={index}>
-                    <NavigationMenuLink
-                      active={link.active}
-                      href={link.href}
-                      className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                    >
-                      {link.label}
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
+
           </div>
         </div>
         {/* Right side */}
-        <div className="flex items-center gap-2">
-          <Button asChild variant="ghost" size="sm" className="text-sm">
-            <a href="#">Sign In</a>
-          </Button>
-          <Button asChild size="sm" className="text-sm">
-            <a href="#">Get Started</a>
-          </Button>
+        <div className='flex gap-6 '>
+          {/* Navigation menu */}
+          <NavigationMenu className="max-md:hidden">
+            <NavigationMenuList className="gap-2">
+              {navigationLinks.map((link, index) => {
+                const isActive = pathName === link.href;
+
+                return (
+                  <NavigationMenuItem key={index}>
+                    <Link href={link.href}>
+                      <Button
+                        variant={isActive ? "secondary" : "ghost"}
+                        size="sm"
+
+                      >
+                        {link.label}
+                      </Button>
+                    </Link>
+                  </NavigationMenuItem>
+                );
+              })}
+
+            </NavigationMenuList>
+          </NavigationMenu>
+
+          <div>
+            <Input size={12} />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link href={"/auth/login"}> <Button variant="ghost" size="sm" className="text-sm">
+              Sign In
+            </Button>
+            </Link>
+            <Link href={"/auth/register"}>
+              <Button size="sm" className="text-sm">
+                Sign Up
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
