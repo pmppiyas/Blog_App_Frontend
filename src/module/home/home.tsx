@@ -1,10 +1,9 @@
-import Header from '@/components/ui/header'
-import React from 'react'
+import Hero from '@/module/home/hero';
 
 export default function Home() {
   return (
-    <div >
-      <Header title='Home Page'></Header>
+    <div className='min-h-[calc(100vh_-_70px)] '>
+      <Hero />
     </div>
   )
 }
