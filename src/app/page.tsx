@@ -1,6 +1,6 @@
-import Home from '@/module/home/home';
-import Footer from '@/module/shared/Footer';
-import Navbar from '@/module/shared/Navbar';
+import Home from '@/app/module/home/home';
+import Footer from '@/app/module/shared/Footer';
+import Navbar from '@/app/module/shared/Navbar';
 
 export default function HomePage() {
   return (

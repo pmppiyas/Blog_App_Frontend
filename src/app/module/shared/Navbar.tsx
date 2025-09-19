@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import Logo from '../../../public/icon/logo'
+import Logo from '../../../../public/icon/logo'
 import Link from "next/link";
 import { Input } from '@/components/ui/input';
 import { usePathname } from "next/navigation";

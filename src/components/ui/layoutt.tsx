@@ -1,5 +1,5 @@
-import Footer from '@/module/shared/Footer'
-import Navbar from '@/module/shared/Navbar'
+import Footer from '@/app/module/shared/Footer'
+import Navbar from '@/app/module/shared/Navbar'
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
