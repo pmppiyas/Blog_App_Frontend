@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { usePathname } from "next/navigation";
 
-export default function BlogDetail({ blogId }: { blogId: string }) {
+export default function BlogDetail() {
   const [blog, setBlog] = useState<IBlog>()
   const pathName = usePathname();
   const segments = pathName.split("/");
@@ -20,7 +20,7 @@ export default function BlogDetail({ blogId }: { blogId: string }) {
     fetchBlog();
   }, [id]);
 
-  console.log(blog)
+
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
