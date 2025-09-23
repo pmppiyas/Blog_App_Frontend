@@ -1,6 +1,9 @@
 export interface IBlog {
   id: number;
-  body: string;
   title: string;
-  userId: number;
+  content: string;
+  thumbnail: string;
+  tag: string[];
+  views: number;
+  authorId: number;
 }

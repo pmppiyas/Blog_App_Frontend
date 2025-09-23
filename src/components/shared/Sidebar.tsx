@@ -35,6 +35,14 @@ export default function Sidebar() {
           </Link>
 
           <Link
+            href="/dashboard/blogs"
+            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-background hover:text-foreground"
+          >
+            <PlusCircle className="h-4 w-4" />
+            All Blogs
+          </Link>
+
+          <Link
             href="/dashboard/create_blog"
             className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-background hover:text-foreground"
           >

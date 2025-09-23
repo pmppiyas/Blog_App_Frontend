@@ -13,12 +13,15 @@ export default function BlogDetail() {
 
   useEffect(() => {
     const fetchBlog = async () => {
-      const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-      const data: IBlog = await res.json();
-      setBlog(data);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/post/${id}`);
+      const data = await res.json();
+      const blog = data.data;
+      setBlog(blog);
     };
     fetchBlog();
   }, [id]);
+
+  console.log("blog", blog);
 
 
 
@@ -34,7 +37,15 @@ export default function BlogDetail() {
         <time dateTime={"2022-10-10"}>
           {"10th Oct 2022"}
         </time>
-        <Badge variant="outline">Tech</Badge>
+        {
+          <div>
+            {
+              blog?.tag?.map((tag, idx) => (
+                <Badge key={idx} className="ml-2">{tag}</Badge>
+              ))
+            }
+          </div>
+        }
       </div>
 
       <Separator />
@@ -48,7 +59,13 @@ export default function BlogDetail() {
 
       {/* Body */}
       <div className="prose prose-sm sm:prose lg:prose-lg dark:prose-invert max-w-none">
-        <p>{blog?.body}</p>
+        <p>{blog?.content}</p>
+      </div>
+
+      <hr />
+      <div className='flex justify-between'>
+        <p className='text-sm/relaxed  '><span>Author Id</span> {blog?.authorId}</p>
+        <p className='text-sm/relaxed  '><span>Views</span> {blog?.views}</p>
       </div>
     </div>
   );

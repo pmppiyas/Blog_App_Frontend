@@ -6,7 +6,7 @@ export default function DashboardLayout({
   return (
     <main className="min-h-dvh flex ">
       <Sidebar />
-      <div className="flex-1 min-h-dvh overflow-y-auto  pt-16 md:pt-0">
+      <div className="flex-1 min-h-dvh overflow-y-auto  pt-16 md:pt-0 p-4">
         {children}
       </div>
     </main>

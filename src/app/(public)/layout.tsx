@@ -1,5 +1,5 @@
-import Footer from '@/app/module/shared/Footer'
-import Navbar from '@/app/module/shared/Navbar'
+import Footer from '@/components/module/shared/Footer';
+import Navbar from '@/components/module/shared/Navbar';
 
 
 export default function CommeonLayout({ children }: { children: React.ReactNode }) {
