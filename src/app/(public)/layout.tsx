@@ -1,7 +1,6 @@
 import Footer from '@/components/module/shared/Footer';
 import Navbar from '@/components/module/shared/Navbar';
 
-
 export default function CommeonLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
@@ -10,6 +9,7 @@ export default function CommeonLayout({ children }: { children: React.ReactNode 
         {children}
       </div>
       <Footer />
+
     </div>
   )
 }

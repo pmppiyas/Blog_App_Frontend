@@ -1,15 +1,11 @@
-
 import BlogCard from '@/components/module/blog/BlogCard';
 import Header from '@/components/ui/header'
 import { IBlog } from '@/interfaces';
 
 export default async function BlogPage() {
-
-
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/post`, {
     cache: "no-store"
   })
-
   const data = await res.json()
   const blogs = data.data.posts;
 
