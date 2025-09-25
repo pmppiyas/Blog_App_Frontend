@@ -1,0 +1,11 @@
+{
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
+
+  "installCommand": "bun install",
+  "buildCommand": "bun run build",
+  "outputDirectory": ".next"
+}

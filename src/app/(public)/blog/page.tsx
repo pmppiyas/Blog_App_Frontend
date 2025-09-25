@@ -1,11 +1,18 @@
-
+import { Metadata } from "next";
 import BlogCard from '@/components/module/blog/BlogCard';
 import Header from '@/components/ui/header';
 import { IBlog } from '@/interfaces';
 
+export const metadata: Metadata = {
+  title: "All blogs - Prisma blog",
+  description: "A blog built with Next.js, Prisma, and Tailwind CSS",
+}
+
 
 export default async function BlogPage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/post`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/post?limit=100`, {
+    next: { revalidate: 10 }
+  })
 
   const data = await res.json()
   const posts: IBlog[] = data.data?.posts;

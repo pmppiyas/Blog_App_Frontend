@@ -2,6 +2,9 @@ import { Button } from '@/components/ui/button'
 import { IBlog } from '@/interfaces'
 import Link from "next/link"
 
+
+
+
 export default function BlogCard({ blog }: { blog: IBlog }) {
   return (
     <div className=''>
@@ -15,9 +18,9 @@ export default function BlogCard({ blog }: { blog: IBlog }) {
         <div className="bg-background p-4 sm:p-6 grow-1">
           <time dateTime="2022-10-10" className="block text-xs text-primary opacity-70"> 10th Oct 2022 </time>
 
-          <a href="#">
+          <Link href={`/blog/${blog.id}`}>
             <h3 className="mt-0.5 text-lg text-primary">{blog?.title?.slice(0, 30)}</h3>
-          </a>
+          </Link>
 
           <p className="mt-2  text-sm/relaxed text-primary opacity-70">{blog?.content?.slice(0, 100)} <Link href={`/blog/${blog.id}`}>
             <Button className='' variant={"link"}>Read More</Button>

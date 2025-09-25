@@ -6,7 +6,9 @@ import { IBlog } from '@/interfaces';
 export default async function Top_Blogs() {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/post?isFeatured=true`, {
-
+    next: {
+      revalidate: 10
+    }
   })
   const data = await res.json();
   const blogs = data.data.posts
