@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,9 +12,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Image from "next/image";
-// import { signIn } from "next-auth/react";
-// import { login } from "@/actions/auth";
 import { toast } from "sonner";
+import { login } from '@/actions/auth';
+import { signIn } from "next-auth/react"
 
 // type LoginFormValues = {
 //   email: string;
@@ -32,23 +31,24 @@ export default function LoginForm() {
 
   const onSubmit = async (values: FieldValues) => {
     try {
-      // // const res = await login(values);
-      // // if (res?.id) {
-      // //   toast.success("User Logged in Successfully");
-      // // } else {
-      // //   toast.error("User Login Failed");
-      // // }
-      // signIn("credentials", {
-      //   ...values,
-      //   callbackUrl: "/dashboard",
-      // });
+      const res = await login(values);
+
+      if (res.success) {
+        toast.success("User Logged in Successfully");
+      } else {
+        toast.error(res.message || "User Login Failed");
+      }
+
     } catch (err) {
       console.error(err);
+      toast.error("There was an error logging in");
     }
   };
 
-  const handleSocialLogin = (provider: "google" | "github") => {
-    console.log(`Login with ${provider}`);
+  const handleSocialLogin = async (provider: "google" | "github") => {
+    await signIn(provider, {
+      callbackUrl: "/"
+    })
   };
 
   return (
@@ -115,27 +115,10 @@ export default function LoginForm() {
         <Button
           variant="outline"
           className="flex items-center justify-center gap-2"
-          onClick={() => handleSocialLogin("github")}
-        >
-          {/* GitHub */}
-          <Image
-            src="https://img.icons8.com/ios-glyphs/24/github.png"
-            alt="GitHub"
-            className="w-5 h-5"
-            width={20}
-            height={20}
-          />
-          Login with GitHub
-        </Button>
-
-        <Button
-          variant="outline"
-          className="flex items-center justify-center gap-2"
           onClick={() =>
-            // signIn("google", {
-            //   callbackUrl: "/dashboard",
-            // })
-            console.log("Login with Google")
+            signIn("google", {
+              callbackUrl: "/",
+            })
           }
         >
           {/* Google */}
@@ -148,14 +131,29 @@ export default function LoginForm() {
           />
           Login with Google
         </Button>
+        <Button
+          variant="outline"
+          className="flex items-center justify-center gap-2"
+          onClick={() => handleSocialLogin("github")}
+        >
+          {/* GitHub */}
+          <Image
+            src="https://img.icons8.com/ios-glyphs/24/github.png"
+            alt="GitHub"
+            className="w-5 h-5"
+            width={20}
+            height={20}
+          />
+          Login with GitHub
+        </Button>
       </div>
       <p className="text-center text-sm text-gray-500 mt-4">
         Don’t have an account?{" "}
-        <Link href="/auth/register" className="text-blue-500 hover:underline">
+        <Link href="/register" className="text-blue-500 hover:underline">
           Register
         </Link>
       </p>
 
-    </div>
+    </div >
   );
 }

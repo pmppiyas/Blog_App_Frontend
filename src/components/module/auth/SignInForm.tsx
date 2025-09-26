@@ -34,7 +34,7 @@ export default function SignInForm() {
       const res = await register(values);
       if (res.success) {
         toast.success(res.message);
-        router.push('/auth/login');
+        router.push('/login');
         return;
       }
       if (res.err.statusCode === 409) {
@@ -128,7 +128,7 @@ export default function SignInForm() {
 
           <p className="text-center text-sm text-gray-500 mt-4">
             Already have an account?{" "}
-            <Link href="/auth/login" className="text-blue-500 hover:underline">
+            <Link href="/login" className="text-blue-500 hover:underline">
               Login
             </Link>
           </p>

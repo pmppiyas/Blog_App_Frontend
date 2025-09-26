@@ -1,13 +1,19 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Home, PlusCircle, LogOut, Menu, User2Icon } from "lucide-react";
+import { signOut } from "next-auth/react"
+import { toast } from 'sonner';
+
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleLogout = async () => {
+    signOut();
+    toast.success("Logout Successfull")
+  }
   return (
     <>
       {/* Mobile Toggle Button */}
@@ -65,7 +71,7 @@ export default function Sidebar() {
             variant="destructive"
             className="w-full justify-start gap-2 cursor-pointer"
             onClick={() => {
-              console.log("Logout clicked");
+              handleLogout()
             }}
           >
             <LogOut className="h-4 w-4" />

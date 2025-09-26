@@ -126,11 +126,11 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Link href={"/auth/login"}> <Button variant="ghost" size="sm" className="text-sm">
+            <Link href={"/login"}> <Button variant="ghost" size="sm" className="text-sm">
               Sign In
             </Button>
             </Link>
-            <Link href={"/auth/register"}>
+            <Link href={"/register"}>
               <Button size="sm" className="text-sm">
                 Sign Up
               </Button>
