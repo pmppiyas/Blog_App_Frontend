@@ -2,18 +2,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Home, PlusCircle, LogOut, Menu, User2Icon } from "lucide-react";
-import { signOut } from "next-auth/react"
+import { Home, PlusCircle, LogIn, LogOut, Menu, User2Icon } from "lucide-react";
+import { useSession, signOut } from "next-auth/react"
 import { toast } from 'sonner';
-
+import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const session = useSession();
 
   const handleLogout = async () => {
     signOut();
     toast.success("Logout Successfull")
   }
+
+  const router = useRouter();
+
   return (
     <>
       {/* Mobile Toggle Button */}
@@ -67,7 +72,7 @@ export default function Sidebar() {
 
         {/* Bottom action */}
         <div className="p-4 border-t border-background/70">
-          <Button
+          {session.status === "authenticated" ? <Button
             variant="destructive"
             className="w-full justify-start gap-2 cursor-pointer"
             onClick={() => {
@@ -76,7 +81,16 @@ export default function Sidebar() {
           >
             <LogOut className="h-4 w-4" />
             Logout
-          </Button>
+          </Button> : <Button
+            variant="destructive"
+            className="w-full justify-start gap-2 cursor-pointer"
+            onClick={() => {
+              router.push('/login')
+            }}
+          >
+            <LogIn className="h-4 w-4" />
+            Login
+          </Button>}
         </div>
       </aside>
     </>
