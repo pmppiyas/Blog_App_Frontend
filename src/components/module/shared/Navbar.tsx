@@ -15,6 +15,7 @@ import Logo from '../../../../public/icon/logo'
 import Link from "next/link";
 import { Input } from '@/components/ui/input';
 import { usePathname } from "next/navigation";
+import { useSession } from 'next-auth/react';
 
 const navigationLinks = [
   { href: "/", label: "Home", active: true },
@@ -27,7 +28,7 @@ const navigationLinks = [
 export default function Navbar() {
   const pathName = usePathname();
 
-
+  const session = useSession();
 
   return (
     <header className="border-b px-4 md:px-6 ">
@@ -125,7 +126,7 @@ export default function Navbar() {
             <Input size={12} />
           </div>
 
-          <div className="flex items-center gap-2">
+          {session.status === "authenticated" ? <h2>User</h2> : <div className="flex items-center gap-2">
             <Link href={"/login"}> <Button variant="ghost" size="sm" className="text-sm">
               Sign In
             </Button>
@@ -135,7 +136,8 @@ export default function Navbar() {
                 Sign Up
               </Button>
             </Link>
-          </div>
+          </div>}
+
         </div>
       </div>
     </header>
