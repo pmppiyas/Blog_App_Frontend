@@ -5,7 +5,8 @@ import Image from 'next/image';
 export default async function ProfilePage() {
   const session = await getUserSession();
 
-  if (!session || !session.user) {
+
+  if (!session || !session?.user?.email) {
     return (
       <div className="space-y-6">
         <Header title="Profile" />
@@ -20,7 +21,7 @@ export default async function ProfilePage() {
       <Header title="Profile" />
       <div className="flex flex-col items-center justify-center">
         <div className="border-2 rounded-full overflow-hidden">
-          <Image alt={session.user.name as string} src={session.user.image ?? '/default.png'} width={80} height={100} />
+          <Image alt={session.user.name || "profile" as string} src={session.user.image ?? '/default.png'} width={80} height={100} />
         </div>
         <h2 className="text-3xl">Welcome {session.user.name}</h2>
         <h3 className="text-lg text-muted-foreground">{session.user.email}</h3>
