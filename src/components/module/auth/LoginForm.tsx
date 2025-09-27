@@ -1,8 +1,6 @@
 "use client";
-import { FieldValues, useForm } from "react-hook-form";
+import { login } from '@/actions/auth';
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import {
   Form,
   FormControl,
@@ -11,10 +9,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
+import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { login } from '@/actions/auth';
-import { signIn } from "next-auth/react"
 
 // type LoginFormValues = {
 //   email: string;
@@ -31,13 +31,14 @@ export default function LoginForm() {
 
   const onSubmit = async (values: FieldValues) => {
     try {
-      const res = await login(values);
+      const res = await signIn("credentials", {
+        ...values,
+        redirect: true,
+        callbackUrl: "/",
 
-      if (res.success) {
-        toast.success("User Logged in Successfully");
-      } else {
-        toast.error(res.message || "User Login Failed");
-      }
+      })
+      console.log("Froom Login Page",res)
+
 
     } catch (err) {
       console.error(err);

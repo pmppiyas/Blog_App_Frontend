@@ -10,7 +10,6 @@ export const register = async (data: FieldValues) => {
     },
     body: JSON.stringify(data),
   });
-  console.log("From actions", res);
 
   return await res.json();
 };
